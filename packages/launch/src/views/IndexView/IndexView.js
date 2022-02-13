@@ -6,7 +6,7 @@ import Container from 'components/Container';
 import {
   GetStarted,
   Features,
-  QuickStart,
+  // QuickStart,
   Services,
   Benefits,
   Hero,
@@ -16,7 +16,7 @@ const IndexView = () => {
   const theme = useTheme();
   return (
     <Box sx={{ overflowX: 'hidden' }}>
-      <Fluid bgcolor={'background.paper'} colorInvert={theme.palette.mode === 'dark'}>
+      <Fluid bgcolor={'background.paper'} colorInvert={theme.palette.mode === 'dark'} showAppbar={false}>
         <Hero />
         <Container>
           <Services />

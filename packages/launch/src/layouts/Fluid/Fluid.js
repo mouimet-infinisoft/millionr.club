@@ -20,6 +20,7 @@ const Fluid = ({
   children,
   colorInvert = false,
   bgcolor = 'alternate.main',
+  showAppbar = true,
 }) => {
   const theme = useTheme();
   const { mode } = theme.palette;
@@ -42,60 +43,62 @@ const Fluid = ({
 
   return (
     <Box id="js--fluid-top">
-      <AppBar
-        position={'relative'}
-        sx={{
-          top: 0,
-          backgroundColor: bgcolor,
-          zIndex: 9999
-        }}
-        elevation={0}
-      >
-        <Container
-          maxWidth={1500}
-          paddingTop={'8px !important'}
-          paddingBottom={'0 !important'}
+      {showAppbar && (
+        <AppBar
+          position={'relative'}
+          sx={{
+            top: 0,
+            backgroundColor: bgcolor,
+            zIndex: 9999,
+          }}
+          elevation={0}
         >
-          <TopNav colorInvert={colorInvert} />
-        </Container>
-        <Container paddingY={1} maxWidth={1500}>
-          <Box
-            display={'flex'}
-            justifyContent={'space-between'}
-            alignItems={'center'}
-            width={1}
+          <Container
+            maxWidth={1500}
+            paddingTop={'8px !important'}
+            paddingBottom={'0 !important'}
           >
+            <TopNav colorInvert={colorInvert} />
+          </Container>
+          <Container paddingY={1} maxWidth={1500}>
             <Box
               display={'flex'}
-              component="a"
-              href="/"
-              title="theFront"
-              width={{ xs: 100, md: 120 }}
+              justifyContent={'space-between'}
+              alignItems={'center'}
+              width={1}
             >
               <Box
-                component={'img'}
-                src={
-                  mode === 'light' && !colorInvert
-                  ? '/assets/images/millionr-light.svg'
-                  : '/assets/images/millionr-dark.svg'
-                }
-                height={1}
-                width={1}
-              />
+                display={'flex'}
+                component="a"
+                href="/"
+                title="theFront"
+                width={{ xs: 100, md: 120 }}
+              >
+                <Box
+                  component={'img'}
+                  src={
+                    mode === 'light' && !colorInvert
+                      ? '/assets/images/millionr-light.svg'
+                      : '/assets/images/millionr-dark.svg'
+                  }
+                  height={1}
+                  width={1}
+                />
+              </Box>
+              <Button
+                variant="contained"
+                color="primary"
+                component="a"
+                target="blank"
+                href="https://mui.com/store/items/the-front-landing-page/"
+                size="large"
+              >
+                Buy now
+              </Button>
             </Box>
-            <Button
-              variant="contained"
-              color="primary"
-              component="a"
-              target="blank"
-              href="https://mui.com/store/items/the-front-landing-page/"
-              size="large"
-            >
-              Buy now
-            </Button>
-          </Box>
-        </Container>
-      </AppBar>
+          </Container>
+        </AppBar>
+      )}
       <main>
         {children}
         <Divider />

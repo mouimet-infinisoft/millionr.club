@@ -6,8 +6,12 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { alpha, useTheme } from '@mui/material/styles';
+import Countdown from '../../../../components/countdown';
 
 import Container from 'components/Container';
+const end = '2022/02/22 15:00';
+const title = 'VIP Membership offer';
+const membershipAvailable = 400
 
 const Hero = () => {
   const theme = useTheme();
@@ -28,7 +32,10 @@ const Hero = () => {
       }}
     >
       <Box paddingY={{ xs: 0, sm: '4rem', md: '8rem' }}>
-        <Container display='flex' flexDirection={{xs:'column-reverse', sm: 'row'}}>
+        <Container
+          display="flex"
+          flexDirection={{ xs: 'column-reverse', sm: 'row' }}
+        >
           <Box maxWidth={{ xs: 1, sm: '50%' }}>
             <Typography
               variant="h2"
@@ -38,7 +45,7 @@ const Hero = () => {
                 fontWeight: 700,
               }}
             >
-            Turn your NFT
+              Turn your NFT
               <br />
               into{' '}
               <Typography
@@ -52,11 +59,7 @@ const Hero = () => {
                   )} 0%)`,
                 }}
               >
-                <Typed
-                  strings={['millions.']}
-                  typeSpeed={80}
-                  loop={true}
-                />
+                <Typed strings={['millions.']} typeSpeed={80} loop={true} />
               </Typography>
             </Typography>
             <Typography
@@ -65,7 +68,8 @@ const Hero = () => {
               color="text.secondary"
               sx={{ fontWeight: 400 }}
             >
-              MillionR Private Club is the first community giving back to its member.
+              Launching Feb. 22 2022. We offer limited VIP membership. Are you
+              the first millionr?
             </Typography>
             <Box
               display="flex"
@@ -100,18 +104,22 @@ const Hero = () => {
                 </Button>
               </Box>
             </Box>
+            <Countdown.StyledCountdownVariant2 end={end} title={title} membershipAvailable={membershipAvailable}/>
           </Box>
 
-          <Box maxWidth={{ xs: 1, sm: '50%' }} flex='1 1 auto' textAlign='center'>
-              <LazyLoadImage               
+          <Box
+            maxWidth={{ xs: 1, sm: '50%' }}
+            flex="1 1 auto"
+            textAlign="center"
+          >
+            <LazyLoadImage
               src={
                 mode === 'light'
-                ? '/assets/images/millionr-vertical-light.svg'
-                : '/assets/images/millionr-vertical-dark.svg'
+                  ? '/assets/images/millionr-vertical-light.svg'
+                  : '/assets/images/millionr-vertical-dark.svg'
               }
-              />
+            />
           </Box>
-
         </Container>
       </Box>
       <Box
