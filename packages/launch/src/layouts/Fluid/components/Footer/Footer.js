@@ -58,7 +58,7 @@ const Footer = () => {
                 color="text.primary"
                 variant={'subtitle2'}
               >
-                Documentation
+                Offer
               </Link>
             </Box>
             <Box marginTop={1}>
@@ -83,18 +83,7 @@ const Footer = () => {
           color="text.secondary"
           gutterBottom
         >
-          &copy; theFront. 2021, Maccarian. All rights reserved
-        </Typography>
-        <Typography
-          align={'center'}
-          variant={'caption'}
-          color="text.secondary"
-          component={'p'}
-        >
-          When you visit or interact with our sites, services or tools, we or
-          our authorised service providers may use cookies for storing
-          information to help provide you with a better, faster and safer
-          experience and for marketing purposes.
+          &copy; Millionr Private Club, 2022, Infinisoft Inc. All rights reserved
         </Typography>
       </Grid>
     </Grid>

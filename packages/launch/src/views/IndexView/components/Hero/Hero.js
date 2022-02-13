@@ -68,7 +68,7 @@ const Hero = () => {
               color="text.secondary"
               sx={{ fontWeight: 400 }}
             >
-              Launching Feb. 22 2022. We offer limited VIP membership. Are you
+              Launching Feb. 22 2022. We offer very limited VIP presale memberships. Are you
               the first millionr?
             </Typography>
             <Box
@@ -85,7 +85,7 @@ const Hero = () => {
                 fullWidth={isMd ? false : true}
                 href={'/home'}
               >
-                Join now
+                Buy now
               </Button>
               <Box
                 marginTop={{ xs: 2, sm: 0 }}
