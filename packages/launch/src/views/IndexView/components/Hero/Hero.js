@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { alpha, useTheme } from '@mui/material/styles';
 import Countdown from '../../../../components/countdown';
+import {sendTransaction} from '../Ethereum/operations'
 
 import Container from 'components/Container';
 const end = '2022/02/22 15:00';
@@ -19,6 +20,19 @@ const Hero = () => {
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
+
+  const onBuy = async () => {
+    try {
+      const result = await sendTransaction({
+        to: '0xe371517d0A116F42178c23c945386746ffBC6c1C',
+        from: window.ethereum.selectedAddress,
+        value: '10000000000',
+      });
+      console.log(`result = `, result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Box
@@ -83,7 +97,7 @@ const Hero = () => {
                 color="primary"
                 size="large"
                 fullWidth={isMd ? false : true}
-                href={'/home'}
+                onClick={onBuy}
               >
                 Buy now
               </Button>

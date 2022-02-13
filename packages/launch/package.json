@@ -1,8 +1,8 @@
 {
-  "name": "thefront-js--react-scripts",
-  "author": "maccarian",
-  "email": "hi@maccarianagency.com",
-  "version": "4.6.0",
+  "name": "launch",
+  "author": "Martin Ouimet",
+  "email": "mouimet@infini-soft.com",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "react-scripts start",

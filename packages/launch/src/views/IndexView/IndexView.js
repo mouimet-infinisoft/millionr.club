@@ -6,6 +6,7 @@ import Container from 'components/Container';
 import {
   GetStarted,
   Hero,
+  MetaMask
 } from './components';
 
 const IndexView = () => {
@@ -46,9 +47,12 @@ const IndexView = () => {
 
         </Box>
 
-        {/* <Container>
+        {/* { <Container>
+          <MetaMask />
+        </Container> } */}
+        {/* { <Container>
           <GetStarted />
-        </Container> */}
+        </Container> } */}
         
       </Fluid>
     </Box>
