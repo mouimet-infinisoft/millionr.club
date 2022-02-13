@@ -1,4 +1,22 @@
+import Web3 from 'web3';
+
 const isMetaMaskInstalled = () => typeof window.ethereum !== 'undefined';
+
+const requestAccountBalance = async ({account}) => {
+  try {
+    if (typeof window.ethereum !== 'undefined') {
+
+      const web3 = new Web3(Web3.givenProvider)
+      console.log(`Web3 = `, web3)
+      const balance = await web3.eth.getBalance(account)
+
+      // return web3.utils.fromWei(balance, 'ether');
+      return balance;
+    }
+  } catch (error) {
+    console.error(`Cant fetch accounts, error = `, error);
+  }
+};
 
 const requestAccounts = async () => {
   try {
@@ -36,5 +54,6 @@ const sendTransaction = async (txParams) => {
 export {
     isMetaMaskInstalled,
     requestAccounts,
+    requestAccountBalance,
     sendTransaction
 }
