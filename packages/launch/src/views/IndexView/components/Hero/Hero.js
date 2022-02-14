@@ -60,7 +60,7 @@ const Hero = () => {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [balance]);
 
   const timerRef = React.useRef({});
 
@@ -177,7 +177,7 @@ const Hero = () => {
             <AccountBalance
               title="Rewards"
               balance={balance?.[0] || 0}
-              previousBalance={balance?.[1] || 0}
+              variation={(balance?.[0] || 0)-(balance?.[1] || 0)}
               unit="Wei"
             />
             <GraphAccountBalance

@@ -5,15 +5,47 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import Container from 'components/Container';
 
-const AccountBalance = ({ balance, title, previousBalance, unit}) => {
+// const AccountBalanceBlock = ({ accounts }) => {
+//   return (
+//     <Container bgcolor={'alternate.main'}>
+//       <Typography
+//         variant={'h3'}
+//         color={'primary'}
+//         fontWeight={700}
+//         display={'flex'}
+//         alignItems={'flex-end'}
+//         lineHeight={1}
+//       >
+//         Accounts
+//       </Typography>
+
+//       {accounts.map((account) => (
+//         <AccountBalance key={account.address} {...account} />
+//       ))}
+      
+//     </Container>
+//   );
+// };
+
+const AccountBalance = ({ balance, title, variation, unit }) => {
   const theme = useTheme();
-  const isNegative = balance - previousBalance;
+  const isNegative = variation < 0;
 
   return (
-    <Container >
-      <Card >
+    <Container bgcolor={'alternate.main'}>
+      <Typography
+        variant={'h3'}
+        color={'primary'}
+        fontWeight={700}
+        display={'flex'}
+        alignItems={'flex-end'}
+        lineHeight={1}
+      >
+        Accounts
+      </Typography>
+
+      <Card>
         <Box
-        bgcolor={'alternate.main'}
           sx={{
             p: { xs: 2, md: 4 },
             display: 'flex',
@@ -22,7 +54,9 @@ const AccountBalance = ({ balance, title, previousBalance, unit}) => {
           }}
         >
           <Box>
-            <Typography gutterBottom>{title}</Typography>
+            <Typography gutterBottom textAlign={'left'}>
+              {title}
+            </Typography>
             <Typography
               variant={'h4'}
               color={'primary'}
@@ -90,7 +124,7 @@ const AccountBalance = ({ balance, title, previousBalance, unit}) => {
                 />
               )}
             </Box>
-            {previousBalance} {unit}
+            {variation} {unit}
           </Typography>
         </Box>
       </Card>
