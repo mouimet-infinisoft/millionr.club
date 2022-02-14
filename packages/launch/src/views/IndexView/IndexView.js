@@ -2,18 +2,17 @@ import React from 'react';
 import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Fluid from 'layouts/Fluid';
-import Container from 'components/Container';
-import {
-  GetStarted,
-  Hero,
-  MetaMask
-} from './components';
+import { Hero } from './components';
 
 const IndexView = () => {
   const theme = useTheme();
   return (
     <Box sx={{ overflowX: 'hidden' }}>
-      <Fluid bgcolor={'background.paper'} colorInvert={theme.palette.mode === 'dark'} showAppbar={false}>
+      <Fluid
+        bgcolor={'background.paper'}
+        colorInvert={theme.palette.mode === 'dark'}
+        showAppbar={false}
+      >
         <Hero />
 
         <Box
@@ -26,7 +25,6 @@ const IndexView = () => {
             position: 'relative',
           }}
         >
-
           <Box
             component={'svg'}
             preserveAspectRatio="none"
@@ -44,16 +42,7 @@ const IndexView = () => {
               d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"
             ></path>
           </Box>
-
         </Box>
-
-        {/* { <Container>
-          <MetaMask />
-        </Container> } */}
-        {/* { <Container>
-          <GetStarted />
-        </Container> } */}
-        
       </Fluid>
     </Box>
   );

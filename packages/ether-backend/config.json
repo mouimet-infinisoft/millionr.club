@@ -1,0 +1,69 @@
+{
+  "rinkeby-fork":{
+    "name": "Dry run",
+    "network_id":"1234",
+    "alchemy": "dry run",
+    "MNEMONIC": "dry run",
+    "address": {
+      "owner": "dry run",
+      "assets": "dry run",
+      "exchange": "dry run"
+    },
+    "finance": {
+      "payees": [
+        "0x29fD477b2981dDBa3Cda89a633289E54C197BcB9",
+        "0xe371517d0A116F42178c23c945386746ffBC6c1C"
+      ],
+      "shares": [90, 10]
+    }
+  },
+  "rinkeby":{
+    "name": "Public network Rinkeby",
+    "network_id":"4",
+    "alchemy": "https://eth-rinkeby.alchemyapi.io/v2/S5f7HNQSMwp32-3Iewfa8ByqH0-cKeYg",
+    "MNEMONIC": "mass lunch appear culture dragon occur exact drama hurt right detail muffin",
+    "address": {
+      "owner": "0x29fD477b2981dDBa3Cda89a633289E54C197BcB9"
+    },
+    "finance": {
+      "payees": [
+        "0x29fD477b2981dDBa3Cda89a633289E54C197BcB9",
+        "0xe371517d0A116F42178c23c945386746ffBC6c1C"
+      ],
+      "shares": [90, 10]
+    }
+  },
+  "develop":{
+    "name": "Local development environment",
+    "network_id":"5777",
+    "alchemy": "https://eth-rinkeby.alchemyapi.io/v2/S5f7HNQSMwp32-3Iewfa8ByqH0-cKeYg",
+    "MNEMONIC": "mass lunch appear culture dragon occur exact drama hurt right detail muffin",
+    "address": {
+      "owner": "0x29fD477b2981dDBa3Cda89a633289E54C197BcB9"
+    },
+    "finance": {
+      "payees": [
+        "0x29fD477b2981dDBa3Cda89a633289E54C197BcB9",
+        "0xe371517d0A116F42178c23c945386746ffBC6c1C"
+      ],
+      "shares": [90, 10]
+    }
+  },
+  "soliditycoverage":{
+    "name": "Local test environment",
+    "network_id":"1234",
+    "alchemy": "https://eth-rinkeby.alchemyapi.io/v2/S5f7HNQSMwp32-3Iewfa8ByqH0-cKeYg",
+    "MNEMONIC": "mass lunch appear culture dragon occur exact drama hurt right detail muffin",
+    "address": {
+      "owner": "0x29fD477b2981dDBa3Cda89a633289E54C197BcB9"
+    },
+    "finance": {
+      "payees": [
+        "0x29fD477b2981dDBa3Cda89a633289E54C197BcB9",
+        "0xe371517d0A116F42178c23c945386746ffBC6c1C"
+      ],
+      "shares": [90, 10]
+    }
+  },
+  "etherscanapi": "FNM6ZF74SPHPHSZD4ZQCK9NTHFZV6ZJIZS"
+}

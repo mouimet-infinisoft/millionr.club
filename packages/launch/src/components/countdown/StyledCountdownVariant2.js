@@ -5,10 +5,12 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import Container from 'components/Container';
 import useCountdown from './useCountdown';
+import {useVipMembersBalance} from '../AccountBalance/useVipMemberAccount';
 
-const StyledCountdownVariant2 = ({ end, title, membershipAvailable }) => {
+const StyledCountdownVariant2 = ({ end, title }) => {
   const theme = useTheme();
   const { formatedCountdown } = useCountdown({ end });
+  const {balance} = useVipMembersBalance()
 
   return (
     <Container >
@@ -91,7 +93,7 @@ const StyledCountdownVariant2 = ({ end, title, membershipAvailable }) => {
                 />
               )}
             </Box>
-            {membershipAvailable} left
+            {balance} left
           </Typography>
         </Box>
       </Card>

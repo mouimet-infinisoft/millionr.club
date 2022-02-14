@@ -1,0 +1,7 @@
+{
+    "projectName": "MyNftSolution",
+    "namespace": "MyNftSolution.Contracts",
+    "lang": 0,
+    "autoCodeGen": true,
+    "projectPath": "../"
+}

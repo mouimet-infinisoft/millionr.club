@@ -3,47 +3,12 @@ import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
-import Container from 'components/Container';
-
-// const AccountBalanceBlock = ({ accounts }) => {
-//   return (
-//     <Container bgcolor={'alternate.main'}>
-//       <Typography
-//         variant={'h3'}
-//         color={'primary'}
-//         fontWeight={700}
-//         display={'flex'}
-//         alignItems={'flex-end'}
-//         lineHeight={1}
-//       >
-//         Accounts
-//       </Typography>
-
-//       {accounts.map((account) => (
-//         <AccountBalance key={account.address} {...account} />
-//       ))}
-      
-//     </Container>
-//   );
-// };
 
 const AccountBalance = ({ balance, title, variation, unit }) => {
   const theme = useTheme();
   const isNegative = variation < 0;
 
   return (
-    <Container bgcolor={'alternate.main'}>
-      <Typography
-        variant={'h3'}
-        color={'primary'}
-        fontWeight={700}
-        display={'flex'}
-        alignItems={'flex-end'}
-        lineHeight={1}
-      >
-        Accounts
-      </Typography>
-
       <Card>
         <Box
           sx={{
@@ -128,7 +93,7 @@ const AccountBalance = ({ balance, title, variation, unit }) => {
           </Typography>
         </Box>
       </Card>
-    </Container>
+
   );
 };
 

@@ -7,20 +7,15 @@ import Button from '@mui/material/Button';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { alpha, useTheme } from '@mui/material/styles';
 import Countdown from '../../../../components/countdown';
-import { sendTransaction, requestAccountBalance } from '../Ethereum/operations';
-
+import { joinVipMember } from '../../../../Ethereum/millionr';
+import AccountBalanceBlock from 'components/AccountBalance/AccountBalanceBlock';
+import VipMemberAccount from 'components/AccountBalance/VipMemberAccount';
+import AccountBalance from 'components/AccountBalance/AccountBalance';
+import { GraphAccountBalance } from 'components/AccountBalance';
 import Container from 'components/Container';
-import {
-  AccountBalance,
-  GraphAccountBalance,
-} from '../../../../components/AccountBalance';
 
 const end = '2022/02/22 15:00';
 const title = 'VIP Membership offer';
-const membershipAvailable = 400;
-const doguette = '0xe371517d0A116F42178c23c945386746ffBC6c1C';
-const contractAsset = '0x925F9eB672C208d8dD33671fF37e658E03faf11F';
-const contractExchange = '0xE049b6230CB6D6978f0aB61d996b40Cd70eD892a';
 
 const Hero = () => {
   const theme = useTheme();
@@ -28,47 +23,14 @@ const Hero = () => {
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
-  const [balance, setBalance] = React.useState([0]);
 
   const onBuy = async () => {
     try {
-      const result = await sendTransaction({
-        to: contractExchange,
-        from: window.ethereum.selectedAddress,
-        value: '1000',
-      });
-      console.log(`result = `, result);
+      await joinVipMember();
     } catch (error) {
       console.error(error);
     }
   };
-
-  const onBalance = React.useCallback(async () => {
-    try {
-      const result = await requestAccountBalance({
-        account: contractExchange,
-      });
-      console.log(`result = `, result);
-
-      timerRef.current = setTimeout(() => {
-        if (result !== balance[0]) {
-          setBalance((prev) => [result, ...prev]);
-        } else {
-          setBalance((prev) => [...prev]);
-        }
-      }, 1000);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [balance]);
-
-  const timerRef = React.useRef({});
-
-  React.useEffect(() => {
-    onBalance();
-
-    return () => clearTimeout(timerRef.current);
-  }, [onBalance, balance]);
 
   return (
     <Box
@@ -148,7 +110,7 @@ const Hero = () => {
                   color="primary"
                   size="large"
                   fullWidth={isMd ? false : true}
-                  onClick={onBalance}
+                  onClick={onBuy}
                 >
                   More details
                 </Button>
@@ -157,7 +119,6 @@ const Hero = () => {
             <Countdown.StyledCountdownVariant2
               end={end}
               title={title}
-              membershipAvailable={membershipAvailable}
             />
           </Box>
 
@@ -174,15 +135,11 @@ const Hero = () => {
               }
             />
 
-            <AccountBalance
-              title="Rewards"
-              balance={balance?.[0] || 0}
-              variation={(balance?.[0] || 0)-(balance?.[1] || 0)}
-              unit="Wei"
-            />
-            <GraphAccountBalance
-              onRefresh={()=> balance[0]}
-            />
+            <AccountBalanceBlock>
+              <VipMemberAccount />
+              {/* <GraphAccountBalance onRefresh={() => balance[0]} /> */}
+              <AccountBalance />
+            </AccountBalanceBlock>
           </Box>
         </Container>
       </Box>

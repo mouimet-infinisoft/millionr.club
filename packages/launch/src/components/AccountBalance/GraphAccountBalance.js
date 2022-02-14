@@ -81,7 +81,7 @@ const GraphAccountBalance = ({onRefresh}) => {
           text: 'Wei',
         },
         min: 0,
-        max: 25000
+        max: 50000
       },
     },
     interaction: {
