@@ -1,26 +1,20 @@
-import React from 'react';
-import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Fluid from 'layouts/Fluid';
+import { alpha, useTheme } from '@mui/material/styles';
 import Container from 'components/Container';
-import {
-  GetStarted,
-  Features,
-  QuickStart,
-  Services,
-  Benefits,
-  Hero,
-} from './components';
+import Fluid from 'layouts/Fluid';
+import React from 'react';
+import { Benefits, GetStarted, Hero, SingleChoiceOption } from './components';
 
 const IndexView = () => {
   const theme = useTheme();
   return (
     <Box sx={{ overflowX: 'hidden' }}>
-      <Fluid bgcolor={'background.paper'} colorInvert={theme.palette.mode === 'dark'}>
+      <Fluid
+        bgcolor={'background.paper'}
+        colorInvert={theme.palette.mode === 'dark'}
+      >
         <Hero />
-        <Container>
-          <Services />
-        </Container>
+        <Container>{/* <Services /> */}</Container>
         <Box
           sx={{
             backgroundImage: `linear-gradient(to bottom, ${alpha(
@@ -35,7 +29,7 @@ const IndexView = () => {
             <QuickStart />
           </Container> */}
           <Container>
-            <Features />
+            <SingleChoiceOption />
           </Container>
 
           <Container>
@@ -59,13 +53,11 @@ const IndexView = () => {
               d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"
             ></path>
           </Box>
-
         </Box>
 
         <Container>
           <GetStarted />
         </Container>
-        
       </Fluid>
     </Box>
   );
