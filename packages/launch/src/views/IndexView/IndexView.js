@@ -3,6 +3,7 @@ import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Fluid from 'layouts/Fluid';
 import { Hero } from './components';
+import { GraphAccountBalanceMilie } from 'components/AccountBalance';
 
 const IndexView = () => {
   const theme = useTheme();
@@ -14,6 +15,8 @@ const IndexView = () => {
         showAppbar={false}
       >
         <Hero />
+
+        <GraphAccountBalanceMilie />
 
         <Box
           sx={{
