@@ -1,21 +1,20 @@
-import React from 'react';
-import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import Typography from '@mui/material/Typography';
-import Container from 'components/Container';
-import 'chartjs-adapter-luxon';
-import ChartStreaming from 'chartjs-plugin-streaming';
 import {
-  Chart as ChartJS,
+  BarElement,
   CategoryScale,
+  Chart as ChartJS,
+  Legend,
   LinearScale,
-  PointElement,
   LineElement,
+  PointElement,
   Title,
   Tooltip,
-  Legend,
 } from 'chart.js';
+import 'chartjs-adapter-luxon';
+import ChartStreaming from 'chartjs-plugin-streaming';
+import Container from 'components/Container';
+import React from 'react';
 import { Line } from 'react-chartjs-2';
 ChartJS.register(
   ChartStreaming,
@@ -23,6 +22,7 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
@@ -31,39 +31,65 @@ ChartJS.register(
 const data = {
   datasets: [
     {
-      label: 'Reward Balance Total',
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      cubicInterpolationMode: 'monotone',
-      data: [],
+      type: 'line',
+      label: 'Total Reward Amount',
+      borderColor: 'rgba(36, 255, 0, 0.9)',
+      backgroundColor: 'rgba(36, 255, 0, 0.5)',
+      yAxisID: 'y',
+    },
+    {
+      type: 'bar',
+      label: 'Total Payouts Amount',
+      backgroundColor: 'rgba(0, 0, 255, 0.9)',
+      yAxisID: 'y1',
     },
   ],
 };
 
-
-
-
-const GraphAccountBalance = ({onRefresh}) => {
+const GraphAccountBalance = ({ onRefresh }) => {
   const _onRefresh = (chart) => {
     const now = Date.now();
     chart.data.datasets.forEach((dataset) => {
       dataset.data.push({
         x: now,
-        y: onRefresh(),
+        // y: onRefresh(),
+
+        y: Math.floor(Math.random() * 10000 + 1),
+        y1: Math.floor(Math.random() * 10000 + 3),
       });
     });
   };
 
   const options = {
     responsive: true,
+    elements: {
+      point: {
+        pointStyle: 'rectRounded',
+      },
+
+      line: {
+        cubicInterpolationMode: 'montone',
+        borderJoinStyle: 'bevel',
+      },
+    },
     animations: {
       tension: {
         duration: 1000,
-        easing: 'linear',
+        easing: 'easeInOutQuart',
         from: 1,
         to: 0,
-        loop: true
-      }
+        loop: true,
+      },
+    },
+    interaction: {
+      intersect: false,
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: 'Chart.js Line Chart - Multi Axis',
+        color: 'rgb(255, 99, 132)',
+      },
     },
     scales: {
       x: {
@@ -76,27 +102,28 @@ const GraphAccountBalance = ({onRefresh}) => {
         },
       },
       y: {
-        title: {
-          display: true,
-          text: 'Wei',
-        },
+        type: 'linear',
+        display: true,
+        position: 'left',
         min: 0,
-        max: 25000
+        max: 10000,
+      },
+      y1: {
+        type: 'linear',
+        display: true,
+        position: 'right',
+        min: 0,
+        max: 10000,
       },
     },
-    interaction: {
-      intersect: false,
-    },
   };
-  
+
   return (
     <Container>
       <Card>
-        <Box
-          bgcolor={'alternate.main'}
-        >         
+        <Box bgcolor={'alternate.main'}>
           <div>
-            <Line options={options} data={data} />;
+            <Line options={options} data={data} />
           </div>
         </Box>
       </Card>

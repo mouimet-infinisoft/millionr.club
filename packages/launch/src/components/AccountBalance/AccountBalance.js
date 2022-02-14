@@ -1,9 +1,10 @@
-import React from 'react';
-import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
+import { alpha, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Container from 'components/Container';
+import React from 'react';
+import { CountUp } from 'use-count-up';
 
 // const AccountBalanceBlock = ({ accounts }) => {
 //   return (
@@ -22,7 +23,7 @@ import Container from 'components/Container';
 //       {accounts.map((account) => (
 //         <AccountBalance key={account.address} {...account} />
 //       ))}
-      
+
 //     </Container>
 //   );
 // };
@@ -30,6 +31,9 @@ import Container from 'components/Container';
 const AccountBalance = ({ balance, title, variation, unit }) => {
   const theme = useTheme();
   const isNegative = variation < 0;
+  const onComplete = () => {
+    return { shouldRepeat: true, delay: 1 };
+  };
 
   return (
     <Container bgcolor={'alternate.main'}>
@@ -65,7 +69,12 @@ const AccountBalance = ({ balance, title, variation, unit }) => {
               alignItems={'flex-end'}
               lineHeight={1}
             >
-              {balance}
+              <CountUp
+                isCounting
+                end={Math.floor(Math.random() * 10000)}
+                onComplete={onComplete}
+              />
+
               <Typography
                 component={'span'}
                 variant={'subtitle2'}
