@@ -5,13 +5,14 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import { CountUp } from 'use-count-up';
 
-const AccountBalance = ({ balance, title, variation, unit }) => {
+const AccountBalance = ({ balance, title, variation, unit, decimalPlaces }) => {
   const theme = useTheme();
   const isNegative = variation < 0;
   const onComplete = () => {
-    return { shouldRepeat: true, delay: 0.1 };
+    return { shouldRepeat: true, delay: 2 };
   };
 
+console.log(`balance `,balance)
   return (
     <Card>
       <Box
@@ -34,7 +35,13 @@ const AccountBalance = ({ balance, title, variation, unit }) => {
             alignItems={'flex-end'}
             lineHeight={1}
           >
-            <CountUp isCounting end={balance} onComplete={onComplete} />
+            <CountUp
+              isCounting
+              decimalPlaces={decimalPlaces}
+              end={Number(balance)}
+              duration={1}
+              onComplete={onComplete}
+            />
             <Typography
               component={'span'}
               variant={'subtitle2'}

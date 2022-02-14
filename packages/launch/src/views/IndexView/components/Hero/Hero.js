@@ -10,7 +10,7 @@ import Countdown from '../../../../components/countdown';
 import { joinVipMember } from '../../../../Ethereum/millionr';
 import AccountBalanceBlock from 'components/AccountBalance/AccountBalanceBlock';
 import VipMemberAccount from 'components/AccountBalance/VipMemberAccount';
-import AccountBalance from 'components/AccountBalance/AccountBalance';
+import MillionRAccountBalance from 'components/AccountBalance/MillionRAccountBalance';
 import { GraphAccountBalance } from 'components/AccountBalance';
 import Container from 'components/Container';
 
@@ -116,10 +116,7 @@ const Hero = () => {
                 </Button>
               </Box>
             </Box>
-            <Countdown.StyledCountdownVariant2
-              end={end}
-              title={title}
-            />
+            <Countdown.StyledCountdownVariant2 end={end} title={title} />
           </Box>
 
           <Box
@@ -138,7 +135,7 @@ const Hero = () => {
             <AccountBalanceBlock>
               <VipMemberAccount />
               {/* <GraphAccountBalance onRefresh={() => balance[0]} /> */}
-              <AccountBalance />
+              <MillionRAccountBalance />
             </AccountBalanceBlock>
           </Box>
         </Container>

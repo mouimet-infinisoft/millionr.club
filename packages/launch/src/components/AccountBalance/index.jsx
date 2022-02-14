@@ -3,6 +3,7 @@ import GraphAccountBalance from './GraphAccountBalance'
 import AccountBalanceBlock from './AccountBalanceBlock'
 import VipMemberAccount from './VipMemberAccount'
 import GraphAccountBalanceMilie from './GraphAccountBalanceMilie'
+import MillionRAccountBalance from './MillionRAccountBalance'
 
 
 export { 
@@ -10,5 +11,6 @@ export {
     GraphAccountBalance,
     AccountBalanceBlock,
     VipMemberAccount ,
-    GraphAccountBalanceMilie
+    GraphAccountBalanceMilie,
+    MillionRAccountBalance
 }

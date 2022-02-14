@@ -16,6 +16,7 @@ import ChartStreaming from 'chartjs-plugin-streaming';
 import Container from 'components/Container';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import {useVipMembersBalance} from './useVipMemberAccount';
 ChartJS.register(
   ChartStreaming,
   CategoryScale,
@@ -28,6 +29,7 @@ ChartJS.register(
   Legend,
 );
 
+
 const data = {
   datasets: [
     {
@@ -39,14 +41,16 @@ const data = {
     },
     {
       type: 'bar',
-      label: 'Total Payouts Amount',
+      label: 'VIP Member left',
       backgroundColor: 'rgba(0, 0, 255, 0.9)',
-      yAxisID: 'y1',
+      yAxisID: 'yVipMemberBalance',
     },
   ],
 };
 
 const GraphAccountBalanceMilie = ({ onRefresh }) => {
+  const {balance} = useVipMembersBalance();
+
   const _onRefresh = (chart) => {
     const now = Date.now();
     chart.data.datasets.forEach((dataset) => {
@@ -55,7 +59,7 @@ const GraphAccountBalanceMilie = ({ onRefresh }) => {
         // y: onRefresh(),
 
         y: Math.floor(Math.random() * 10000 + 1),
-        y1: Math.floor(Math.random() * 10000 + 3),
+        yVipMemberBalance: balance,
       });
     });
   };
@@ -87,7 +91,7 @@ const GraphAccountBalanceMilie = ({ onRefresh }) => {
     plugins: {
       title: {
         display: true,
-        text: 'Chart.js Line Chart - Multi Axis',
+        text: 'MillionR',
         color: 'rgb(255, 99, 132)',
       },
     },

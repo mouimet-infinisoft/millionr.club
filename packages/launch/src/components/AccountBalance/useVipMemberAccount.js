@@ -11,7 +11,7 @@ export const useVipMembersBalance = () => {
       clearTimeout(timerRef.current);
       timerRef.current = setTimeout(() => {        
           setBalance({balance: result});
-      }, 1000);
+      }, 100);
     } catch (error) {
       console.error(error);
     }

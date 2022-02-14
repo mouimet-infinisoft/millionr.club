@@ -7,7 +7,8 @@ const VipMemberAccount = () => {
   return (
     <AccountBalance
       title="VIP Members"
-      unit="ether"
+      unit="nft"
+      decimalPlaces={0}
       variation={0}
       balance={balance} />
   );

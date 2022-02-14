@@ -34,7 +34,25 @@ const requestVipMembersBalance = async () => {
   }
 };
 
+const subscribeVipMembersBalance = async () => {
+  try {
+    if (typeof window.ethereum !== 'undefined') {
+      const web3 = new Web3(Web3.givenProvider);
+      const contract = new web3.eth.Contract(
+        artifact.abi,
+        artifact.networks[4].address,
+      );
+      const balance = await contract.events.on('data',()=>{
+        console.log(`EVEHEGVEUHFYGUEYGUYh`)
+      })
+      return balance
+    }
+  } catch (error) {
+    console.error(`Cant fetch accounts, error = `, error);
+  }
+};
 export {
   requestVipMembersBalance,
-  joinVipMember
+  joinVipMember,
+  subscribeVipMembersBalance
 };
