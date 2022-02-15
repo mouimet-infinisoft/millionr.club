@@ -12,7 +12,6 @@ const AccountBalance = ({ balance, title, variation, unit, decimalPlaces }) => {
     return { shouldRepeat: true, delay: 2 };
   };
 
-console.log(`balance `,balance)
   return (
     <Card>
       <Box

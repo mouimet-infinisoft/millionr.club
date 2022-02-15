@@ -2,7 +2,7 @@ import React from 'react';
 import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Fluid from 'layouts/Fluid';
-import { Hero } from './components';
+import { Hero, MoreDetails } from './components';
 import { GraphAccountBalanceMilie } from 'components/AccountBalance';
 
 const IndexView = () => {
@@ -16,7 +16,8 @@ const IndexView = () => {
       >
         <Hero />
 
-        <GraphAccountBalanceMilie />
+        <MoreDetails />
+        {/* <GraphAccountBalanceMilie /> */}
 
         <Box
           sx={{

@@ -17,6 +17,7 @@ import Container from 'components/Container';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 import {useVipMembersBalance} from './useVipMemberAccount';
+import {useAccountBalance} from './useAccountBalance';
 ChartJS.register(
   ChartStreaming,
   CategoryScale,
@@ -43,23 +44,22 @@ const data = {
       type: 'bar',
       label: 'VIP Member left',
       backgroundColor: 'rgba(0, 0, 255, 0.9)',
-      yAxisID: 'yVipMemberBalance',
+      yAxisID: 'y1',
     },
   ],
 };
 
 const GraphAccountBalanceMilie = ({ onRefresh }) => {
-  const {balance} = useVipMembersBalance();
+  const {balance:vipBalance} = useVipMembersBalance();
+  const {balance:vipAccountBalance} = useAccountBalance({account:"0x29fD477b2981dDBa3Cda89a633289E54C197BcB9"});
 
   const _onRefresh = (chart) => {
     const now = Date.now();
     chart.data.datasets.forEach((dataset) => {
       dataset.data.push({
         x: now,
-        // y: onRefresh(),
-
-        y: Math.floor(Math.random() * 10000 + 1),
-        yVipMemberBalance: balance,
+        y: dataset.yAxisID === 'y' ? vipBalance : vipAccountBalance[0],
+        y1: dataset.yAxisID === 'y1' ? vipBalance : vipAccountBalance[0],
       });
     });
   };
@@ -110,14 +110,14 @@ const GraphAccountBalanceMilie = ({ onRefresh }) => {
         display: true,
         position: 'left',
         min: 0,
-        max: 10000,
+        max:200,
       },
       y1: {
         type: 'linear',
         display: true,
         position: 'right',
         min: 0,
-        max: 10000,
+        max: 200
       },
     },
   };
