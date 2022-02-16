@@ -2,7 +2,7 @@ const { deployProxy, upgradeProxy } = require("@openzeppelin/truffle-upgrades");
 const config = require("../config.json");
 
 const MillionR_V1 = artifacts.require("MillionR_V1");
-// const MillionR_V2 = artifacts.require("MillionR_V2");
+const MillionR_V2 = artifacts.require("MillionR_V2");
 
 const MillionR_Exchange_V1 = artifacts.require("MillionR_Exchange_V1");
 
@@ -38,6 +38,6 @@ module.exports = async function (deployer, network) {
   );
   console.log("MillionR_V1 NFT Smart Contract Deployed at ", instance.address);
 
-  // const instancev2 = await upgradeProxy(instance.address, MillionR_V2);
-  // console.log("MillionRFactoryV2 Deployed", instancev2.address);
+  const instancev2 = await upgradeProxy(instance.address, MillionR_V2);
+  console.log("MillionRFactoryV2 Deployed", instancev2.address);
 };
