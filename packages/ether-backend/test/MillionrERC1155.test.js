@@ -97,8 +97,27 @@ contract("MillionrERC1155Test", (accounts) => {
         await contract.mint(accounts[0], 1, 1, []);
 
         assert.equal(await contract.balanceOf(accounts[0], 0), 1);
-        await contract.safeTransferFrom(accounts[0], accounts[1], 0, 1, []);
+        await contract.memberTransfer(accounts[0], accounts[1], 0, 1, [], {
+            value: web3.utils.toWei("2", "ether"),
+        });
         assert.equal(await contract.balanceOf(accounts[0], 0), 0);
         assert.equal(await contract.balanceOf(accounts[1], 0), 1);
+    });
+
+    it(`safeTransferFrom should revert too poor`, async () => {
+        const contract = await deployProxy(MillionrERC1155Test, [
+            "name",
+            "symbol",
+            "uri",
+            web3.utils.toWei("1", "ether"),
+            1,
+        ]);
+        await contract.mint(accounts[0], 1, 1, []);
+
+        assert.equal(await contract.balanceOf(accounts[0], 0), 1);
+        await expectRevert(
+           contract.memberTransfer(accounts[0], accounts[1], 0, 1, []),
+            "Get a job dawg"
+        );
     });
 });

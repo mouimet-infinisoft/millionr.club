@@ -25,7 +25,7 @@ abstract contract MillionrMembers {
     }
 
     /// @notice Function caller is added as a new member
-    function joinMember() external payable virtual {
+    function joinMember() public payable virtual {
         require(members.length < totalSupply, "The club is full dawg");
         require(msg.value >= _price + tx.gasprice, "Get a job dawg");
 
@@ -40,6 +40,23 @@ abstract contract MillionrMembers {
         // require(members[_id] == msg.sender, "Stealing is bad dawg");
 
         updateMember(_to, _id);
+    }
+
+    /// @notice Membership can be transfered to another account
+    function memberTransfer(
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+
+    ) public payable virtual {
+        require(msg.value >= tx.gasprice, "Get a job dawg");
+        require(isMemberExisting(id), "Member not in the club");
+        require(to != address(0x0), "Cannot trash something precious");
+        // require(members[_id] == msg.sender, "Stealing is bad dawg");
+
+        updateMember(to, id);
     }
 
     function addMember(address account) internal {

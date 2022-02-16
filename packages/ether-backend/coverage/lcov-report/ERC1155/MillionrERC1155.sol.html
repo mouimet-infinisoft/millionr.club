@@ -167,7 +167,22 @@
 122
 123
 124
-125</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -206,11 +221,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6×</span>
-<span class="cline-any cline-yes">6×</span>
-<span class="cline-any cline-yes">6×</span>
-<span class="cline-any cline-yes">6×</span>
-<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,9 +236,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -243,7 +257,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -252,14 +265,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8×</span>
-<span class="cline-any cline-yes">8×</span>
-<span class="cline-any cline-yes">6×</span>
-<span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -337,18 +367,33 @@ abstract contract MillionrERC1155 is
         symbol = newsymbol;
     }
 &nbsp;
-    /**Hooks*/
-&nbsp;
-    function safeTransferFrom(
+    function memberTransfer(
         address from,
         address to,
         uint256 id,
         uint256 amount,
         bytes memory data
-    ) public virtual override {
+&nbsp;
+    ) public payable override(MillionrMembers) {
+        super.memberTransfer(from, to, id, amount, data);
         super._safeTransferFrom(from, to, id, amount, data);
-        super.updateMember(to, id);
+&nbsp;
+        
     }
+&nbsp;
+    /**Hooks*/
+&nbsp;
+    // function safeTransferFrom(
+    //     address from,
+    //     address to,
+    //     uint256 id,
+    //     uint256 amount,
+    //     bytes memory data
+    // ) public virtual override {
+    //     super._safeTransferFrom(from, to, id, amount, data);
+    //     super.updateMember(to, id);
+    //     // super.updateMember(to, id);
+    // }
 &nbsp;
     // function _safeBatchTransferFrom(
     //     address from,
@@ -421,7 +466,7 @@ abstract contract MillionrERC1155 is
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 16 2022 14:25:17 GMT-0500 (Eastern Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 16 2022 15:29:26 GMT-0500 (Eastern Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>

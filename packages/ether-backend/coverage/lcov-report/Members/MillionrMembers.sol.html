@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>14/14</span>
+        <span class='fraction'>18/18</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">87.5% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>14/16</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>6/6</span>
+        <span class='fraction'>7/7</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>14/14</span>
+        <span class='fraction'>18/18</span>
       </div>
     </div>
   </div>
@@ -101,7 +101,24 @@
 56
 57
 58
-59</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -123,8 +140,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11×</span>
-<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -146,8 +163,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6×</span>
-<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -156,7 +190,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">6×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
@@ -186,7 +220,7 @@ abstract contract MillionrMembers {
     }
 &nbsp;
     /// @notice Function caller is added as a new member
-    function joinMember() external payable virtual {
+    function joinMember() public payable virtual {
         require(members.length &lt; totalSupply, "The club is full dawg");
         require(msg.value &gt;= _price + tx.gasprice, "Get a job dawg");
 &nbsp;
@@ -201,6 +235,23 @@ abstract contract MillionrMembers {
         // require(members[_id] == msg.sender, "Stealing is bad dawg");
 &nbsp;
         updateMember(_to, _id);
+    }
+&nbsp;
+    /// @notice Membership can be transfered to another account
+    function memberTransfer(
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+&nbsp;
+    ) public payable virtual {
+        require(msg.value &gt;= tx.gasprice, "Get a job dawg");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(isMemberExisting(id), "Member not in the club");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(to != address(0x0), "Cannot trash something precious");
+        // require(members[_id] == msg.sender, "Stealing is bad dawg");
+&nbsp;
+        updateMember(to, id);
     }
 &nbsp;
     function addMember(address account) internal {
@@ -223,7 +274,7 @@ abstract contract MillionrMembers {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 16 2022 14:25:17 GMT-0500 (Eastern Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 16 2022 15:29:26 GMT-0500 (Eastern Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>

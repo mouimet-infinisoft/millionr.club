@@ -44,18 +44,33 @@ abstract contract MillionrERC1155 is
         symbol = newsymbol;
     }
 
-    /**Hooks*/
-
-    function safeTransferFrom(
+    function memberTransfer(
         address from,
         address to,
         uint256 id,
         uint256 amount,
         bytes memory data
-    ) public virtual override {
+
+    ) public payable override(MillionrMembers) {
+        super.memberTransfer(from, to, id, amount, data);
         super._safeTransferFrom(from, to, id, amount, data);
-        super.updateMember(to, id);
+
+        
     }
+
+    /**Hooks*/
+
+    // function safeTransferFrom(
+    //     address from,
+    //     address to,
+    //     uint256 id,
+    //     uint256 amount,
+    //     bytes memory data
+    // ) public virtual override {
+    //     super._safeTransferFrom(from, to, id, amount, data);
+    //     super.updateMember(to, id);
+    //     // super.updateMember(to, id);
+    // }
 
     // function _safeBatchTransferFrom(
     //     address from,
