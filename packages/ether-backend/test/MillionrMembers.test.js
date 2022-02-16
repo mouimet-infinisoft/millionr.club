@@ -94,20 +94,20 @@ contract("MillionrMembersTest", (accounts) => {
         );
     });
 
-    it(`transferMember(): Should revert when sender is not owner of membership`, async () => {
-        await contract.initialize(web3.utils.toWei("0.01", "ether"), 10);
+    // it(`transferMember(): Should revert when sender is not owner of membership`, async () => {
+    //     await contract.initialize(web3.utils.toWei("0.01", "ether"), 10);
 
-        await contract.joinMember({
-            from: accounts[0],
-            value: web3.utils.toWei("0.02", "ether"),
-        });
+    //     await contract.joinMember({
+    //         from: accounts[0],
+    //         value: web3.utils.toWei("0.02", "ether"),
+    //     });
 
-        await expectRevert(
-            contract.transferMember(accounts[1], 0, {
-                from: accounts[1],
-                value: web3.utils.toWei("0.02", "ether"),
-            }),
-            "Stealing is bad dawg"
-        );
-    });
+    //     await expectRevert(
+    //         contract.transferMember(accounts[1], 0, {
+    //             from: accounts[1],
+    //             value: web3.utils.toWei("0.02", "ether"),
+    //         }),
+    //         "Stealing is bad dawg"
+    //     );
+    // });
 });

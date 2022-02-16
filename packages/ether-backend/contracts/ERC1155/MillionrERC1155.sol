@@ -10,6 +10,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableMap.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC1155/utils/ERC1155HolderUpgradeable.sol";
 import "../Members/MillionrMembers.sol";
 
 /// @title NFT ERC11155 abstraction
@@ -18,12 +19,16 @@ import "../Members/MillionrMembers.sol";
 abstract contract MillionrERC1155 is
     Initializable,
     ERC1155Upgradeable,
+    ERC1155HolderUpgradeable,
     OwnableUpgradeable,
     MillionrMembers
 {
     string public name;
     string public symbol;
     uint256 private _availableTokenId;
+
+    /// @custom:oz-upgrades-unsafe-allow constructor
+    constructor() initializer {}
 
     function initialize(
         string memory newname,
@@ -34,19 +39,20 @@ abstract contract MillionrERC1155 is
     ) public initializer {
         __ERC1155_init(newuri);
         __Ownable_init();
-        MillionrMembers.initialize(_initialPrice, _initialMaxTotalSupply);
+        super.initialize(_initialPrice, _initialMaxTotalSupply);
         name = newname;
         symbol = newsymbol;
     }
 
     /**Hooks*/
-    function _safeTransferFrom(
+
+    function safeTransferFrom(
         address from,
         address to,
         uint256 id,
         uint256 amount,
         bytes memory data
-    ) internal virtual override {
+    ) public virtual override {
         super._safeTransferFrom(from, to, id, amount, data);
         super.updateMember(to, id);
     }
@@ -85,6 +91,18 @@ abstract contract MillionrERC1155 is
         _mint(_account, _availableTokenId, 1, _data);
         super.addMember(_account);
         generateTokenId();
+    }
+
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        virtual
+        override(ERC1155ReceiverUpgradeable, ERC1155Upgradeable)
+        returns (bool)
+    {
+        return
+            interfaceId == type(MillionrERC1155).interfaceId ||
+            super.supportsInterface(interfaceId);
     }
 
     // function mintBatch(
