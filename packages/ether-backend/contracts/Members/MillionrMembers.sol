@@ -34,7 +34,7 @@ abstract contract MillionrMembers {
     }
 
     /// @notice Membership can be transfered to another account
-    function transferMember(address _to, uint256 _id) external payable virtual {        
+    function transferMember(address _to, uint256 _id) external payable virtual {
         require(msg.value >= tx.gasprice, "Get a job dawg");
         require(isMemberExisting(_id), "Member not in the club");
         require(_to != address(0x0), "Cannot trash something precious");

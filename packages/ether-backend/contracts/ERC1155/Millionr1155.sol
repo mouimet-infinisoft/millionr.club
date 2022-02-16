@@ -10,11 +10,17 @@ import "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableMap.sol";
-import '../Members/MillionrMembers.sol';
+import "../Members/MillionrMembers.sol";
 
+/// @title NFT ERC11155 abstraction
+/// @author Martin Ouimet <mouimet@infini-soft.com>
 /// @custom:security-contact security@infin-soft.cloud
-contract MillionrERC1155 is Initializable, ERC1155Upgradeable, OwnableUpgradeable {
-    uint public cost;
+abstract contract MillionrERC1155 is
+    Initializable,
+    ERC1155Upgradeable,
+    OwnableUpgradeable,
+    MillionrMembers
+{
     string public name;
     string public symbol;
 
@@ -23,8 +29,11 @@ contract MillionrERC1155 is Initializable, ERC1155Upgradeable, OwnableUpgradeabl
     function initialize(
         string memory newname,
         string memory newsymbol,
-        string memory newuri
-    )  public initializer  {
+        string memory newuri,
+        uint256 _initialPrice,
+        uint256 _initialMaxTotalSupply
+    ) public initializer {
+        MillionrMembers.initialize(_initialPrice, _initialMaxTotalSupply);
         name = newname;
         symbol = newsymbol;
         _setURI(newuri);
@@ -59,19 +68,19 @@ contract MillionrERC1155 is Initializable, ERC1155Upgradeable, OwnableUpgradeabl
 
     /** Members - END */
 
-    // function mint(
-    //     address account,
-    //     uint256 id,
-    //     uint256 amount,
-    //     bytes memory data
-    // ) public onlyOwner {
-    //     if (isMemberExisting(id) || amount != 1) {
-    //         revert("Invalid request!");
-    //     } else {
-    //         _mint(account, id, amount, data);
-    //         addMember(id, account);
-    //     }
-    // }
+    function mint(
+        address _account,
+        uint256 _id,
+        uint256 _amount,
+        bytes memory _data
+    ) external onlyOwner {
+        require(isMemberExisting(_id), "Member already in the club");
+        require(_account != address(0x0), "Cannot trash something precious");
+        require(_amount != 1, "Member are unique dawg");
+
+        // uint id = MillionrMembers.addMember(_account);
+        _mint(_account, _id, 1, _data);
+    }
 
     // function mintBatch(
     //     address to,

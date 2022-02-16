@@ -3,8 +3,7 @@
  * Infinisoft Inc.
  * www.infini-soft.com
  */
-const {zeroEAO} = require("./helpers/ethereum");
-const {expectEvent, expectRevert} = require("@openzeppelin/test-helpers");
+const {constants, expectEvent, expectRevert} = require("@openzeppelin/test-helpers");
 
 const MillionrMembersTest = artifacts.require("MillionrMembersTest");
 
@@ -65,7 +64,7 @@ contract("MillionrMembersTest", (accounts) => {
         );
     });
 
-    it(`transferMember(): Wrong to EOA address should revert`, async () => {
+    it(`transferMember(): Wrong to EOA zero address should revert`, async () => {
         await contract.initialize(web3.utils.toWei("0.01", "ether"), 10);
 
         const result = await contract.joinMember({
@@ -73,7 +72,7 @@ contract("MillionrMembersTest", (accounts) => {
         });
 
         await expectRevert(
-            contract.transferMember(zeroEAO(), 0, {
+            contract.transferMember(constants.ZERO_ADDRESS, 0, {
                 value: web3.utils.toWei("0.02", "ether"),
             }),
             "Cannot trash something precious"
