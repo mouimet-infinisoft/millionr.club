@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/11</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/3</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/11</span>
       </div>
     </div>
   </div>
@@ -144,7 +144,14 @@
 99
 100
 101
-102</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+102
+103
+104
+105
+106
+107
+108</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,12 +200,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,11 +223,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -270,8 +282,9 @@ abstract contract MillionrERC1155 is
 {
     string public name;
     string public symbol;
+    uint256 private _availableTokenId;
 &nbsp;
-<span class="fstat-no" title="function not covered" >    constructor() initializer {}</span>
+    // constructor() initializer {}
 &nbsp;
 <span class="fstat-no" title="function not covered" >    function initialize(</span>
         string memory newname,
@@ -287,17 +300,17 @@ abstract contract MillionrERC1155 is
     }
 &nbsp;
     /**Hooks*/
-    // function _safeTransferFrom(
-    //     address from,
-    //     address to,
-    //     uint256 id,
-    //     uint256 amount,
-    //     bytes memory data
-    // ) internal virtual override {
-    //     super._safeTransferFrom(from, to, id, amount, data);
+<span class="fstat-no" title="function not covered" >    function _safeTransferFrom(</span>
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+    ) internal virtual override {
+<span class="cstat-no" title="statement not covered" >        super._safeTransferFrom(from, to, id, amount, data)</span>;
 &nbsp;
-    //     updateMember(id, to);
-    // }
+        // MillionrMembers.transferMember(to, id);
+    }
 &nbsp;
     // function _safeBatchTransferFrom(
     //     address from,
@@ -315,18 +328,23 @@ abstract contract MillionrERC1155 is
 &nbsp;
     /** Members - END */
 &nbsp;
+<span class="fstat-no" title="function not covered" >    function generateTokenId() private {</span>
+<span class="cstat-no" title="statement not covered" >        _availableTokenId += 1</span>;
+    }
+&nbsp;
 <span class="fstat-no" title="function not covered" >    function mint(</span>
         address _account,
-        uint256 _id,
-        uint256 _amount,
+        uint256 _id, // ignored
+        uint256 _amount, // ignore
         bytes memory _data
     ) external onlyOwner {
-<span class="cstat-no" title="statement not covered" >        require(isMemberExisting(_id), "Member already in the club")</span>;
 <span class="cstat-no" title="statement not covered" >        require(_account != address(0x0), "Cannot trash something precious")</span>;
 <span class="cstat-no" title="statement not covered" >        require(_amount != 1, "Member are unique dawg")</span>;
+<span class="cstat-no" title="statement not covered" >        require(members.length &lt; maxTotalSupply, "The club is full dawg")</span>;
 &nbsp;
-        // uint id = MillionrMembers.addMember(_account);
-<span class="cstat-no" title="statement not covered" >        _mint(_account, _id, 1, _data)</span>;
+<span class="cstat-no" title="statement not covered" >        _mint(_account, _availableTokenId, 1, _data)</span>;
+<span class="cstat-no" title="statement not covered" >        generateTokenId()</span> ;
+&nbsp;
     }
 &nbsp;
     // function mintBatch(
@@ -352,7 +370,7 @@ abstract contract MillionrERC1155 is
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 16 2022 08:48:52 GMT-0500 (Eastern Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 16 2022 09:38:47 GMT-0500 (Eastern Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>

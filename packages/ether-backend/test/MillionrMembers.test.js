@@ -45,7 +45,7 @@ contract("MillionrMembersTest", (accounts) => {
             value: web3.utils.toWei("0.02", "ether"),
         });
 
-       expectEvent(result, "JoinMember");
+       expectEvent(result, "JoinMember");      
     });
 
     it(`transferMember(): No money, no transfer should revert`, async () => {

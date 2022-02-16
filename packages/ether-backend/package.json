@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "directories": {
-    "build":"./build"
+    "build": "./build"
   },
   "scripts": {
     "test": "bash test/scripts/runTestsCoverage.sh",
@@ -24,7 +24,8 @@
     "form-data": "^4.0.0",
     "node-fetch-commonjs": "^3.1.1",
     "solidity-coverage": "^0.7.19",
-    "web3": "^1.7.0"
+    "web3": "^1.7.0",
+    "zos-lib": "^2.4.3"
   },
   "devDependencies": {
     "@openzeppelin/test-helpers": "^0.5.15",

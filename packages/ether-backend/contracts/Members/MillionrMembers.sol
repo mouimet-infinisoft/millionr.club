@@ -11,26 +11,25 @@ pragma solidity ^0.8.11;
 /// @custom:security-contact security@infin-soft.cloud
 abstract contract MillionrMembers {
     uint256 internal _price;
-    uint256 public maxTotalSupply;
-    address[] public members;
+    uint256 public totalSupply;
+    address[] internal members;
 
     event JoinMember(address indexed _member);
     event TransferMember(address indexed _to, uint256 _id);
 
-    function initialize(uint256 _initialPrice, uint256 _initialMaxTotalSupply)
+    function initialize(uint256 _initialPrice, uint256 _initialtotalSupply)
         public
     {
         _price = _initialPrice;
-        maxTotalSupply = _initialMaxTotalSupply;
+        totalSupply = _initialtotalSupply;
     }
 
     /// @notice Function caller is added as a new member
     function joinMember() external payable virtual {
-        require(members.length < maxTotalSupply, "The club is full dawg");
+        require(members.length < totalSupply, "The club is full dawg");
         require(msg.value >= _price + tx.gasprice, "Get a job dawg");
 
         addMember(msg.sender);
-        emit JoinMember(msg.sender);
     }
 
     /// @notice Membership can be transfered to another account
@@ -41,15 +40,16 @@ abstract contract MillionrMembers {
         require(members[_id] == msg.sender, "Stealing is bad dawg");
 
         updateMember(_to, _id);
-        emit TransferMember(_to, _id);
     }
 
     function addMember(address account) internal {
         members.push(account);
+        emit JoinMember(msg.sender);
     }
 
     function updateMember(address _to, uint256 _id) internal {
         members[_id] = _to;
+        emit TransferMember(_to, _id);
     }
 
     function isMemberExisting(uint256 id) internal view returns (bool) {

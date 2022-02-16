@@ -23,8 +23,7 @@ abstract contract MillionrERC1155 is
 {
     string public name;
     string public symbol;
-
-    constructor() initializer {}
+    uint256 private _availableTokenId;
 
     function initialize(
         string memory newname,
@@ -33,24 +32,24 @@ abstract contract MillionrERC1155 is
         uint256 _initialPrice,
         uint256 _initialMaxTotalSupply
     ) public initializer {
+        __ERC1155_init(newuri);
+        __Ownable_init();
         MillionrMembers.initialize(_initialPrice, _initialMaxTotalSupply);
         name = newname;
         symbol = newsymbol;
-        _setURI(newuri);
     }
 
     /**Hooks*/
-    // function _safeTransferFrom(
-    //     address from,
-    //     address to,
-    //     uint256 id,
-    //     uint256 amount,
-    //     bytes memory data
-    // ) internal virtual override {
-    //     super._safeTransferFrom(from, to, id, amount, data);
-
-    //     updateMember(id, to);
-    // }
+    function _safeTransferFrom(
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+    ) internal virtual override {
+        super._safeTransferFrom(from, to, id, amount, data);
+        super.updateMember(to, id);
+    }
 
     // function _safeBatchTransferFrom(
     //     address from,
@@ -68,18 +67,24 @@ abstract contract MillionrERC1155 is
 
     /** Members - END */
 
+    function generateTokenId() private {
+        _availableTokenId += 1;
+    }
+
     function mint(
         address _account,
-        uint256 _id,
-        uint256 _amount,
+        uint256 _id, // ignored
+        uint256 _amount, // ignore
         bytes memory _data
     ) external onlyOwner {
-        require(isMemberExisting(_id), "Member already in the club");
+        require(_id >= 0, "");
         require(_account != address(0x0), "Cannot trash something precious");
-        require(_amount != 1, "Member are unique dawg");
+        require(_amount == 1, "Member are unique dawg");
+        require(members.length < totalSupply, "The club is full dawg");
 
-        // uint id = MillionrMembers.addMember(_account);
-        _mint(_account, _id, 1, _data);
+        _mint(_account, _availableTokenId, 1, _data);
+        super.addMember(_account);
+        generateTokenId();
     }
 
     // function mintBatch(
