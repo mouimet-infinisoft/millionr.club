@@ -5,27 +5,31 @@ import "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-/// @custom:security-contact info@infin-soft.com
-contract MillionrV1 is Initializable, ERC1155Upgradeable, OwnableUpgradeable {
-    uint public available;
-    uint public soldMembership;
-    uint constant public PAYBACK_RATE = 2;
+/// @custom:security-contact security@infin-soft.cloud
+contract MillionrFacade is
+    Initializable,
+    ERC1155Upgradeable,
+    OwnableUpgradeable
+{
+    uint256 public available;
+    uint256 public soldMembership;
+    uint256 public constant PAYBACK_RATE = 2;
     string public name;
     string public symbol;
     address[] public members;
-    uint private _initialPrice;
-    uint private _nextAvailableTokenId;
+    uint256 private _initialPrice;
+    uint256 private _nextAvailableTokenId;
 
     event MemberJoin(address indexed _member);
-    event Payback(address indexed _member, uint _value);
+    event Payback(address indexed _member, uint256 _value);
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     // UNCOMMENT TO USE OUTSIDE LOCAL
     // constructor() initializer {}
 
-// UNCOMMENT for local
+    // UNCOMMENT for local
     constructor(
-             string memory newname,
+        string memory newname,
         string memory newsymbol,
         string memory newuri
     ) initializer {
@@ -41,46 +45,48 @@ contract MillionrV1 is Initializable, ERC1155Upgradeable, OwnableUpgradeable {
         string memory newsymbol,
         string memory newuri
     ) public initializer {
-         __ERC1155_init(newuri);
+        __ERC1155_init(newuri);
         __Ownable_init();
         name = newname;
         symbol = newsymbol;
         _initialPrice = 1 ether;
     }
 
-// chsnge to https://docs.chain.link/docs/get-a-random-number/
-    function random() private view returns (uint) {
-        return uint(keccak256(abi.encodePacked(block.timestamp, block.difficulty)));
+    // chsnge to https://docs.chain.link/docs/get-a-random-number/
+    function random() private view returns (uint256) {
+        return
+            uint256(
+                keccak256(abi.encodePacked(block.timestamp, block.difficulty))
+            );
     }
 
-    function getRandomIndex(uint _limit) public view returns (uint) {
-        return uint(random() %  _limit);
+    function getRandomIndex(uint256 _limit) public view returns (uint256) {
+        return uint256(random() % _limit);
     }
 
     function vipPayback() private {
-        uint _memberIndex = getRandomIndex(soldMembership);
+        uint256 _memberIndex = getRandomIndex(soldMembership);
 
-uint _amount = address(this).balance;
-address payable _member = payable(members[_memberIndex]);
+        uint256 _amount = address(this).balance;
+        address payable _member = payable(members[_memberIndex]);
 
         _member.transfer(_amount);
         emit Payback(_member, _amount);
     }
 
+    function getAvailableTokenId() private returns (uint256) {
+        _nextAvailableTokenId = _nextAvailableTokenId + 1;
+        return _nextAvailableTokenId;
+    }
 
-function getAvailableTokenId() private returns (uint) {
-    _nextAvailableTokenId = _nextAvailableTokenId + 1;
-    return _nextAvailableTokenId;
-}
-
-function getLastTokenId() private view returns (uint) {
-    return _nextAvailableTokenId;
-}
+    function getLastTokenId() private view returns (uint256) {
+        return _nextAvailableTokenId;
+    }
 
     function memberJoin() public payable {
         require(available > 0, "No more vip members");
         require(msg.value >= _initialPrice + tx.gasprice, "Get a job");
-        uint tokenId = getAvailableTokenId();
+        uint256 tokenId = getAvailableTokenId();
 
         _safeTransferFrom(owner(), msg.sender, tokenId, 1, "");
         updateMember(tokenId, msg.sender);
@@ -94,14 +100,14 @@ function getLastTokenId() private view returns (uint) {
         }
     }
 
-    function balance() public view returns (uint) {
+    function balance() public view returns (uint256) {
         return address(this).balance;
     }
 
     function createVipMember(uint256 amount) public onlyOwner {
         uint256[] memory ids = new uint256[](amount);
         uint256[] memory amounts = new uint256[](amount);
-        uint initialId = members.length;
+        uint256 initialId = members.length;
 
         for (uint256 i = 0; i < amount; i++) {
             ids[i] = i + initialId;
@@ -110,8 +116,6 @@ function getLastTokenId() private view returns (uint) {
 
         mintBatch(msg.sender, ids, amounts, "");
     }
-
-
 
     /** Members - START */
     function addMember(uint256 id, address account) private {

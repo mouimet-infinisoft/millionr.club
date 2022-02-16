@@ -1,5 +1,5 @@
 const { deployProxy, upgradeProxy } = require("@openzeppelin/truffle-upgrades");
-const config = require("../config.json");
+const config = require("../../config.json");
 
 const MillionR_V1 = artifacts.require("MillionR_V1");
 const MillionR_V2 = artifacts.require("MillionR_V2");

@@ -4,8 +4,8 @@
  * www.infini-soft.com
  */
 const { deployProxy } = require("@openzeppelin/truffle-upgrades");
-const MillionR_Exchange_V1_Test_Factory = require('./factories/millionr_exchange_v1_test_factory');
-const config = require('../config.json');
+const MillionR_Exchange_V1_Test_Factory = require('../factories/millionr_exchange_v1_test_factory');
+const config = require('../../config.json');
 
 if (
   !config?.develop?.finance?.payees ||
