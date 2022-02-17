@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.11+commit.d7f03943"
 	},
 	"language": "Solidity",
 	"output": {
@@ -28,6 +28,19 @@
 					}
 				],
 				"name": "ApprovalForAll",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_member",
+						"type": "address"
+					}
+				],
+				"name": "JoinMember",
 				"type": "event"
 			},
 			{
@@ -92,6 +105,25 @@
 					{
 						"indexed": true,
 						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "TransferMember",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
 						"name": "operator",
 						"type": "address"
 					},
@@ -143,10 +175,6 @@
 				"type": "event"
 			},
 			{
-				"stateMutability": "payable",
-				"type": "fallback"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -195,84 +223,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "cost",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "createVipMember",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "exchangeProxy",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
-					}
-				],
-				"name": "getMember",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getMembersCount",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "giveBackBitch",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "string",
@@ -290,9 +240,32 @@
 						"type": "string"
 					},
 					{
-						"internalType": "address",
-						"name": "_exchangeProxy",
-						"type": "address"
+						"internalType": "uint256",
+						"name": "_initialPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_initialMaxTotalSupply",
+						"type": "uint256"
+					}
+				],
+				"name": "initialize",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_initialPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_initialtotalSupply",
+						"type": "uint256"
 					}
 				],
 				"name": "initialize",
@@ -326,7 +299,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "joinVipMember",
+				"name": "joinMember",
 				"outputs": [],
 				"stateMutability": "payable",
 				"type": "function"
@@ -335,7 +308,12 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "account",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
 						"type": "address"
 					},
 					{
@@ -354,35 +332,35 @@
 						"type": "bytes"
 					}
 				],
-				"name": "mint",
+				"name": "memberTransfer",
 				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "to",
+						"name": "_account",
 						"type": "address"
 					},
 					{
-						"internalType": "uint256[]",
-						"name": "ids",
-						"type": "uint256[]"
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
 					},
 					{
-						"internalType": "uint256[]",
-						"name": "amounts",
-						"type": "uint256[]"
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
 					},
 					{
 						"internalType": "bytes",
-						"name": "data",
+						"name": "_data",
 						"type": "bytes"
 					}
 				],
-				"name": "mintBatch",
+				"name": "mint",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -398,6 +376,84 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC1155BatchReceived",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC1155Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -507,19 +563,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
-						"name": "newuri",
-						"type": "string"
-					}
-				],
-				"name": "setURI",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "bytes4",
 						"name": "interfaceId",
 						"type": "bytes4"
@@ -547,6 +590,37 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "transferMember",
+				"outputs": [],
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -580,40 +654,10 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "vipMembersBalance",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "vipMembersCount",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"stateMutability": "payable",
-				"type": "receive"
 			}
 		],
 		"devdoc": {
-			"custom:security-contact": "info@infin-soft.com",
+			"custom:security-contact": "security@infin-soft.cloud",
 			"kind": "dev",
 			"methods": {
 				"balanceOf(address,uint256)": {
@@ -640,9 +684,6 @@
 				"setApprovalForAll(address,bool)": {
 					"details": "See {IERC1155-setApprovalForAll}."
 				},
-				"supportsInterface(bytes4)": {
-					"details": "See {IERC165-supportsInterface}."
-				},
 				"transferOwnership(address)": {
 					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
 				},
@@ -655,8 +696,14 @@
 		"userdoc": {
 			"kind": "user",
 			"methods": {
-				"setURI(string)": {
-					"notice": "Members - END "
+				"joinMember()": {
+					"notice": "Function caller is added as a new member"
+				},
+				"memberTransfer(address,address,uint256,uint256,bytes)": {
+					"notice": "Membership can be transfered to another account"
+				},
+				"transferMember(address,uint256)": {
+					"notice": "Membership can be transfered to another account"
 				}
 			},
 			"version": 1
@@ -664,7 +711,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/MillionR_V2.sol": "MillionR_V2"
+			"contracts/ERC1155/MillionrERC1155Test.sol": "MillionrERC1155Test"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -726,6 +773,22 @@
 				"dweb:/ipfs/QmY8K1YZQmuL2WDTPC8QwCm3ztrUD7JKmnvoZkMyGZceiM"
 			]
 		},
+		"@openzeppelin/contracts-upgradeable/token/ERC1155/utils/ERC1155HolderUpgradeable.sol": {
+			"keccak256": "0xa8a1f16aa62b4d8c9e380057d9c3ee5c992e4a10dccc5650b26e38d4c61287d4",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://50e44f018c6406333f6abf21f4f0bc1fbaef31b388bc3bd337cd6e6d099829bb",
+				"dweb:/ipfs/QmeV9HNfHH7P9cdQ3ZgqAVYZHPyEqVCFRiaJdqiGinSAsX"
+			]
+		},
+		"@openzeppelin/contracts-upgradeable/token/ERC1155/utils/ERC1155ReceiverUpgradeable.sol": {
+			"keccak256": "0xa1b77d6d0f4591359c42b747a31375f20b0571b5e1fb62652d8184fb10f1d63a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2046c535b9a580e22b404b014ed5a3cf272abb178e9997b3e67717b55fbd9c0a",
+				"dweb:/ipfs/QmYiV76MTduunY4brmqrJgkiBcMxHxsRnzCZWBMvXoVQuY"
+			]
+		},
 		"@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol": {
 			"keccak256": "0x55cf2bd9fc76704ddcdc19834cd288b7de00fc0f298a40ea16a954ae8991db2d",
 			"license": "MIT",
@@ -774,20 +837,28 @@
 				"dweb:/ipfs/QmTqU65L6iu6yqmXKzcNLPioR8etzKPWycpDJCm17ifVdS"
 			]
 		},
-		"contracts/MillionR_V1.sol": {
-			"keccak256": "0xf65a7bf209a12b85c70c7c4b9176d5bda885b2d27444aaaf06158f5a20be4b60",
+		"contracts/ERC1155/MillionrERC1155.sol": {
+			"keccak256": "0xc27f1fa4ec5e8252b96d6bac531c3df51ddf7bf51e1cad036213dc179c10f26b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://528d2e2971822b02d0af5157f416b29197d46904512acf36ec8c465006c5b88f",
-				"dweb:/ipfs/QmYezRWo3VMvWQ3VuUuz8jkZ9LcVE57TfEaQfE85CzmS1m"
+				"bzz-raw://414534b120cdbe56ffae29384d8ec0f1452a4c88c78ed073124cf960d1716e22",
+				"dweb:/ipfs/QmXschmZspxU72MMhsSfCtGq4JhuzNEE9wbHb8KYGFWHE6"
 			]
 		},
-		"contracts/MillionR_V2.sol": {
-			"keccak256": "0x5858069eb756b575a7cd18cba2e3c73137767a2ddd74a22eef7d4a8d269d3e18",
+		"contracts/ERC1155/MillionrERC1155Test.sol": {
+			"keccak256": "0xfa4e25566564deddb0f9473f999b54342d6cfe0811497e784e8fa8ef77b2c542",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a042635c4730168dbd590163d7415ef99ea4e0f795d28a11996ce0cd615bd1f6",
-				"dweb:/ipfs/QmV3UwJ8LiTfBxQh3UGLvkNqe4JyZ499BtenbF3V7hUDEa"
+				"bzz-raw://e088bcf1a8caf57f7afb95891a5ed0dfb8fe30d00ac5e6300690cdce916cfd16",
+				"dweb:/ipfs/QmWjW4xds9zT4ZndWhTEw3tyVUBNmGN82den3jF44wX5jn"
+			]
+		},
+		"contracts/Members/MillionrMembers.sol": {
+			"keccak256": "0xd1ac3bb2e81570a2c3dadcf623442dc6468960a183a0cef64cb43a80e49555f5",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2aa46a8d43a72633f5ba17148575216215a05fea40e31aeefe6d75d19c2205d4",
+				"dweb:/ipfs/QmaeHkyKpPEXjKMSXQDwsdP7LYXDN2Yvxc1x9sVCo7dkDq"
 			]
 		}
 	},

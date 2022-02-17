@@ -1,28 +1,12 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.11+commit.d7f03943"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "newname",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "newsymbol",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "newuri",
-						"type": "string"
-					}
-				],
+				"inputs": [],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -57,19 +41,6 @@
 					{
 						"indexed": true,
 						"internalType": "address",
-						"name": "_member",
-						"type": "address"
-					}
-				],
-				"name": "MemberJoin",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
 						"name": "previousOwner",
 						"type": "address"
 					},
@@ -81,25 +52,6 @@
 					}
 				],
 				"name": "OwnershipTransferred",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "_member",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "_value",
-						"type": "uint256"
-					}
-				],
-				"name": "Payback",
 				"type": "event"
 			},
 			{
@@ -196,45 +148,6 @@
 				"type": "event"
 			},
 			{
-				"inputs": [],
-				"name": "PAYBACK_RATE",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "available",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "balance",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -283,55 +196,7 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "createVipMember",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_limit",
-						"type": "uint256"
-					}
-				],
-				"name": "getRandomIndex",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "newname",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "newsymbol",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "newuri",
-						"type": "string"
-					}
-				],
+				"inputs": [],
 				"name": "initialize",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -359,88 +224,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "memberJoin",
-				"outputs": [],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "members",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "account",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bytes",
-						"name": "data",
-						"type": "bytes"
-					}
-				],
-				"name": "mint",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "ids",
-						"type": "uint256[]"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "amounts",
-						"type": "uint256[]"
-					},
-					{
-						"internalType": "bytes",
-						"name": "data",
-						"type": "bytes"
-					}
-				],
-				"name": "mintBatch",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -563,32 +346,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
-						"name": "newuri",
-						"type": "string"
-					}
-				],
-				"name": "setURI",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "soldMembership",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "bytes4",
 						"name": "interfaceId",
 						"type": "bytes4"
@@ -652,7 +409,8 @@
 			}
 		],
 		"devdoc": {
-			"custom:security-contact": "info@infin-soft.com",
+			"author": "Martin Ouimet <mouimet@infini-soft.com>",
+			"custom:security-contact": "security@infin-soft.cloud",
 			"kind": "dev",
 			"methods": {
 				"balanceOf(address,uint256)": {
@@ -696,17 +454,13 @@
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {
-				"setURI(string)": {
-					"notice": "Members - END "
-				}
-			},
+			"methods": {},
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/MillionR_V1.sol": "Millionr_V1"
+			"contracts/deeznuts/DeezNutsERC1155.sol": "DeezNutsERC1155"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -800,12 +554,12 @@
 				"dweb:/ipfs/QmcnbqX85tsWnUXPmtuPLE4SczME2sJaTfmqEFkuAJvWhy"
 			]
 		},
-		"contracts/MillionR_V1.sol": {
-			"keccak256": "0x089e90b2c40008f36c0eb31fd45d403de4761cc4bc860b08442aad829c517771",
+		"contracts/deeznuts/DeezNutsERC1155.sol": {
+			"keccak256": "0x30440014b0de8246cb426e95d4cb455843c06b8e3d474f1d3e75eeb70ea9646d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://23ecdb1e136813f78f3898f7f4e9a9ccdcc71fc59b69bb8aa063bbc7bcaee0b1",
-				"dweb:/ipfs/QmYdkQEnMzfXVktuUq8twUTMRZM5FJSfrkcDkcYE6V1hit"
+				"bzz-raw://24da14841c9586328ae558d5ff8ac80f6ff254aa6bb715547e74dcf59f7408c7",
+				"dweb:/ipfs/QmfS2kLezzu3PaHkrRkfwBhNg1QduUUiBdpAZDe38WrMYP"
 			]
 		}
 	},

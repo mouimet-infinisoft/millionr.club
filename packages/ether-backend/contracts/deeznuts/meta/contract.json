@@ -1,0 +1,8 @@
+{
+    "name": "Deez Nutz Official",
+    "description": "You have the chance to buy deez unique nuts!",
+    "image": "https://cantwait2fuckcors.s3.amazonaws.com/logobrand.png",
+    "external_link": "https://cantwait2fuckcors.s3.amazonaws.com/logobrand.png",
+    "seller_fee_basis_points": 10000,
+    "fee_recipient": "0x29fD477b2981dDBa3Cda89a633289E54C197BcB9"
+  }

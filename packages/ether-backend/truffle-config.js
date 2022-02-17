@@ -31,6 +31,16 @@ module.exports = {
       network_id: "4",
       gas: 4600000
     },
+    main: {
+      provider: function() {
+        return new HDWalletProvider(
+          rinkeby.MNEMONIC,
+          "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"
+        );
+      },
+      network_id: "1",
+      gas: 4600000
+    }
   },
 
   // Set default mocha options here, use special reporters etc.

@@ -5,9 +5,9 @@
  */
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.11;
-import "./MillionrERC1155.sol";
+import "./MillionrERC1155Upgradeable.sol";
 
 /// @custom:security-contact security@infin-soft.cloud
-contract MillionrERC1155Test is MillionrERC1155  {
+contract MillionrERC1155UpgradeableTest is MillionrERC1155Upgradeable {
 
 }

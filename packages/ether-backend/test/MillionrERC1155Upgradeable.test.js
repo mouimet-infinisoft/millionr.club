@@ -11,11 +11,11 @@ const {
 } = require("@openzeppelin/test-helpers");
 const {deployProxy, upgradeProxy} = require("@openzeppelin/truffle-upgrades");
 
-const MillionrERC1155Test = artifacts.require("MillionrERC1155Test");
+const MillionrERC1155Upgradeable = artifacts.require("MillionrERC1155UpgradeableTest");
 
-contract("MillionrERC1155Test", (accounts) => {
+contract("MillionrERC1155UpgradeableTest", (accounts) => {
     it(`Initializer`, async () => {
-        const result = await deployProxy(MillionrERC1155Test, [
+        const result = await deployProxy(MillionrERC1155Upgradeable, [
             "name",
             "symbol",
             "uri",
@@ -27,7 +27,7 @@ contract("MillionrERC1155Test", (accounts) => {
     });
 
     it(`mint should emit TransferSingle Event`, async () => {
-        const contract = await deployProxy(MillionrERC1155Test, [
+        const contract = await deployProxy(MillionrERC1155Upgradeable, [
             "name",
             "symbol",
             "uri",
@@ -42,7 +42,7 @@ contract("MillionrERC1155Test", (accounts) => {
     });
 
     it(`mint should revert with zero address `, async () => {
-        const contract = await deployProxy(MillionrERC1155Test, [
+        const contract = await deployProxy(MillionrERC1155Upgradeable, [
             "name",
             "symbol",
             "uri",
@@ -57,7 +57,7 @@ contract("MillionrERC1155Test", (accounts) => {
     });
 
     it(`mint should revert with amount != 1`, async () => {
-        const contract = await deployProxy(MillionrERC1155Test, [
+        const contract = await deployProxy(MillionrERC1155Upgradeable, [
             "name",
             "symbol",
             "uri",
@@ -72,7 +72,7 @@ contract("MillionrERC1155Test", (accounts) => {
     });
 
     it(`mint should revert when totalsupply is reached`, async () => {
-        const contract = await deployProxy(MillionrERC1155Test, [
+        const contract = await deployProxy(MillionrERC1155Upgradeable, [
             "name",
             "symbol",
             "uri",
@@ -87,7 +87,7 @@ contract("MillionrERC1155Test", (accounts) => {
     });
 
     it(`safeTransferFrom should success`, async () => {
-        const contract = await deployProxy(MillionrERC1155Test, [
+        const contract = await deployProxy(MillionrERC1155Upgradeable, [
             "name",
             "symbol",
             "uri",
@@ -105,7 +105,7 @@ contract("MillionrERC1155Test", (accounts) => {
     });
 
     it(`safeTransferFrom should revert too poor`, async () => {
-        const contract = await deployProxy(MillionrERC1155Test, [
+        const contract = await deployProxy(MillionrERC1155Upgradeable, [
             "name",
             "symbol",
             "uri",
